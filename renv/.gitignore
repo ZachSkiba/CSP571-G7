@@ -1,0 +1,5 @@
+﻿# This file is used by renv to control which folders are managed.
+# Library paths are ignored in version control.
+library/
+python/
+staging/

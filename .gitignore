@@ -1,0 +1,26 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.cache/
+.venv/
+venv/
+.env
+*.egg-info/
+*.dist-info/
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rproj
+renv/library/
+renv/python/
+renv/staging/
+
+# OS
+.DS_Store
+Thumbs.db
