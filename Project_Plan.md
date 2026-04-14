@@ -50,13 +50,121 @@ The final presentation must include the following sections:
 **Person 1:** Draft project plan and timeline slide (methodology, task ownership, schedule).  
 **Deliverables:** Git/repo setup, role assignment, data cleaning, literature review, EDA notebook + summary.
 
-### Week 2: Apr 14 - Apr 20 (Preprocessing, Transformation & Unsupervised) 
-- **Katana:** Train/test split + class imbalance handling, Stratified 80/20 split · SMOTE on training set · export shared X_train, X_test, y_train, y_test for all 5
-- **Matthiias:** Feature encoding + scaling pipeline, Confirm all features are numeric · StandardScaler on BMI, MentHlth, PhysHlth · document choices
-- **Matthew:** PCA for dimensionality reduction, Scree plot · 2D scatter colored by label · PC loadings table · note dominant lifestyle features.
-- **Mohemmad:** K-Means clustering + interpretation, Elbow method · k=2 and k=3 · Adjusted Rand Index · cluster mean profiles (lifestyle descriptions).
-- **Zach:** Logistic Regression baseline (both datasets), Binary + multinomial · classification report · ROC-AUC · coefficient plot · documents benchmark F1.
-- **Deliverables:** Clean preprocessing pipeline, unsupervised results, baseline model.
+---
+
+### Week 2: Apr 14 – Apr 20 (Preprocessing, Transformation & Unsupervised)
+
+## 🎯 Goal
+- Finalize shared dataset
+- Build preprocessing pipeline
+- Generate unsupervised insights (PCA + K-Means)
+- Establish baseline model (logistic regression)
+
+
+
+## ⚠️ Shared Rules (Everyone)
+- Use SAME train/test split (no exceptions)
+- 80/20 split, stratified, random_state=42
+- SMOTE ONLY on training data
+- Scaling: fit on train, apply to test
+- Use both datasets (binary + multiclass)
+
+
+
+## 👤 Katana — Data Split + SMOTE
+- Perform stratified 80/20 split (both datasets)
+- Apply SMOTE to training set only
+- Keep test set untouched
+- Export:
+  - X_train, X_test, y_train, y_test
+- Verify class balance before vs after SMOTE
+
+**Deliverables:**
+- Shared dataset files
+- Class balance summary
+
+
+
+## 👤 Matthiias — Scaling + Preprocessing Pipeline
+- Confirm all features are numeric
+- Apply StandardScaler to:
+  - BMI, MentHlth, PhysHlth
+- Do NOT scale binary features
+- Build reusable preprocessing pipeline
+- Output scaled X_train, X_test
+
+**Deliverables:**
+- Preprocessing notebook
+- Final scaled dataset
+
+
+
+## 👤 Matthew — PCA (Dimensionality Reduction)
+- Run PCA on scaled data
+- Create scree plot (explained variance)
+- Plot PC1 vs PC2:
+  - Colored by binary labels
+  - Colored by multiclass labels
+- Extract top feature loadings
+
+**Focus:**
+- Which lifestyle features drive variation?
+- Do classes separate naturally?
+
+**Deliverables:**
+- Scree plot
+- PCA scatter plots
+- Loadings + short insights
+
+
+
+## 👤 Mohemmad — K-Means Clustering
+- Run elbow method (determine k)
+- Fit K-Means with:
+  - k = 2 and k = 3
+- Compute Adjusted Rand Index (vs labels)
+- Analyze cluster averages:
+  - BMI, smoking, activity, health
+
+**Focus:**
+- Describe clusters in plain terms:
+  - “Healthy group”
+  - “High-risk group”
+
+**Deliverables:**
+- Elbow plot
+- Cluster summaries
+- Interpretation
+
+
+
+## 👤 Zach — Logistic Regression Baseline
+- Train models on both datasets:
+  - Binary (class_weight='balanced')
+  - Multinomial logistic regression
+- Evaluate:
+  - Accuracy, Precision, Recall, F1
+  - ROC-AUC (binary)
+  - Confusion matrix
+- Convert coefficients → odds ratios
+
+**Focus:**
+- Identify strongest lifestyle predictors of diabetes
+
+**Deliverables:**
+- Model performance (binary vs multiclass)
+- Coefficient/odds ratio plot
+- Key insights
+
+
+
+## ✅ Deliverables (End of Week)
+- Clean preprocessing pipeline
+- Shared dataset (used by all)
+- PCA + clustering results
+- Logistic regression baseline
+
+---
 
 ### Week 3: Apr 21 - Apr 27 (Modeling & Evaluation)
 - **Person 2:** Random Forest on both datasets (tune depth/estimators, feature importance, macro F1).  
