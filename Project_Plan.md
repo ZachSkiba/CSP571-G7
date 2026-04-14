@@ -56,7 +56,7 @@ The final presentation must include the following sections:
 - **Matthew:** PCA for dimensionality reduction, Scree plot · 2D scatter colored by label · PC loadings table · note dominant lifestyle features.
 - **Mohemmad:** K-Means clustering + interpretation, Elbow method · k=2 and k=3 · Adjusted Rand Index · cluster mean profiles (lifestyle descriptions).
 - **Zach:** Logistic Regression baseline (both datasets), Binary + multinomial · classification report · ROC-AUC · coefficient plot · documents benchmark F1.
-**Deliverables:** Clean preprocessing pipeline, unsupervised results, baseline model.
+- **Deliverables:** Clean preprocessing pipeline, unsupervised results, baseline model.
 
 ### Week 3: Apr 21 - Apr 27 (Modeling & Evaluation)
 - **Person 2:** Random Forest on both datasets (tune depth/estimators, feature importance, macro F1).  
