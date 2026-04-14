@@ -50,10 +50,22 @@ The final presentation must include the following sections:
 **Person 1:** Draft project plan and timeline slide (methodology, task ownership, schedule).  
 **Deliverables:** Git/repo setup, role assignment, data cleaning, literature review, EDA notebook + summary.
 
-### Week 2: Apr 14 - Apr 20 (Preprocessing, Transformation & Unsupervised)
-**All Members:** Establish preprocessing pipeline (feature encoding, scaling, train/test splits, handle class imbalance via SMOTE/class weights).  
-**Person 5:** Run unsupervised methods (PCA, K-Means clustering, cluster interpretation).  
-**Person 1:** Train, evaluate, document Logistic Regression baseline for both datasets.  
+### Week 2: Apr 14 - Apr 20 (Preprocessing, Transformation & Unsupervised) 
+**Katana:**
+Train/test split + class imbalance handling
+Stratified 80/20 split · SMOTE on training set · export shared X_train, X_test, y_train, y_test for all 5
+**Person 2:**
+Feature encoding + scaling pipeline
+Confirm all features are numeric · StandardScaler on BMI, MentHlth, PhysHlth · document choices
+**Person 3:**
+PCA for dimensionality reduction
+Scree plot · 2D scatter colored by label · PC loadings table · note dominant lifestyle features
+**Person 4:**
+K-Means clustering + interpretation
+Elbow method · k=2 and k=3 · Adjusted Rand Index · cluster mean profiles (lifestyle descriptions)
+**Zach:**
+Logistic Regression baseline (both datasets)
+Binary + multinomial · classification report · ROC-AUC · coefficient plot · documents benchmark F1
 **Deliverables:** Clean preprocessing pipeline, unsupervised results, baseline model.
 
 ### Week 3: Apr 21 - Apr 27 (Modeling & Evaluation)
