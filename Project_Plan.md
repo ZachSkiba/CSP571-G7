@@ -66,8 +66,9 @@ The final presentation must include the following sections:
 - Katana provides ONLY ONE stratified 80/20 split (binary + multiclass)
 - All teams use the SAME train/test split
 - The test set is NEVER touched until final evaluation
-- SMOTE is NOT applied globally (it is handled inside model pipelines later)
+- SMOTE is NOT applied globally. It is only used inside training pipelines (and, when applicable, inside cross-validation folds). All imbalance handling must occur only on training data.
 - Scaling is fit on training data only and applied to test data using the same transformation
+- All preprocessing, SMOTE, and scaling must be fit ONLY on training data and never on test data.
 
 ---
 
@@ -112,7 +113,7 @@ The final presentation must include the following sections:
 ---
 
 ## 👤 Matthew — PCA Analysis
-- Run PCA on scaled training data (no SMOTE before PCA)
+- PCA must be performed on scaled training data only (no SMOTE applied before PCA)
 - Scree plot (explained variance)
 - 2D PCA visualization:
   - binary labels
@@ -151,8 +152,9 @@ The final presentation must include the following sections:
 
 ## 👤 Zach — Logistic Regression Baseline
 - Train logistic regression on training set only
-- Apply imbalance handling inside model:
-  - SMOTE OR class_weight='balanced'
+- Apply ONE imbalance method:
+  - class_weight='balanced' (preferred baseline), OR
+  - SMOTE applied only on training data (for comparison if needed)
 - Evaluate:
   - Accuracy, Precision, Recall, F1
   - ROC-AUC (binary only)

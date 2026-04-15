@@ -1,11 +1,13 @@
 ## FINAL MODEL TRAINING RULES (IMPORTANT)
 
 ### ⚠️ Core Rule (VERY IMPORTANT)
-All models must handle class imbalance using an appropriate method:
-- Either SMOTE (for applicable models — see A and B below)
-- Or class weights (preferred for tree-based models)
+All models must handle class imbalance using at least one appropriate method:
+- SMOTE (only where appropriate and inside training pipelines)
+- OR class weights (preferred for tree-based models like Random Forest and XGBoost)
 
 No model is allowed to ignore class imbalance.
+
+Optionally, a subset of models may compare SMOTE vs class_weight as an experiment for analysis.
 
 ---
 
