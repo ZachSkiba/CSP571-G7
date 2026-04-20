@@ -1,0 +1,84 @@
+---
+title: "PCA"
+author: "Matthew"
+date: "2026-04-20"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+
+binary_train <- read.csv(file.choose())
+
+multiclass_train <- read.csv(file.choose())
+
+# Identifying strictly continuous numeric columns to scale. I wasn't given the columns to scale so used ones mentioned in the plan.
+cols_to_scale <- c("BMI", "MentHlth", "PhysHlth") 
+
+binary_train_scaled <- binary_train
+multiclass_train_scaled <- multiclass_train
+
+# Apply the scale() function ONLY to those specific columns
+binary_train_scaled[cols_to_scale] <- scale(binary_train[cols_to_scale])
+multiclass_train_scaled[cols_to_scale] <- scale(multiclass_train[cols_to_scale])
+
+features_binary <- binary_train_scaled[, !names(binary_train_scaled) %in% c("Diabetes_binary")]
+target_binary <- as.factor(binary_train_scaled$Diabetes_binary)
+
+features_multi <- multiclass_train_scaled[, !names(multiclass_train_scaled) %in% c("Diabetes_012")]
+target_multi <- as.factor(multiclass_train_scaled$Diabetes_012)
+
+pca_binary <- prcomp(features_binary, center = TRUE, scale. = FALSE)
+pca_multi <- prcomp(features_multi, center = TRUE, scale. = FALSE)
+
+var_explained_bin <- pca_binary$sdev^2 / sum(pca_binary$sdev^2)
+
+plot(var_explained_bin, xlab = "Principal Component",
+     ylab = "Proportion of Variance Explained",
+     type = "b", pch = 19, col = "darkblue",
+     main = "Scree Plot: Binary Dataset")
+
+pca_data_bin <- data.frame(PC1 = pca_binary$x[, 1],
+                           PC2 = pca_binary$x[, 2],
+                           Diabetes = target_binary)
+
+ggplot(pca_data_bin, aes(x = PC1, y = PC2, color = Diabetes)) +
+  geom_point(alpha = 0.5) +
+  theme_minimal() +
+  labs(title = "2D PCA Visualization: Binary Labels (0 vs 1)",
+       x = paste0("PC1 (", round(var_explained_bin[1]*100, 1), "% Variance)"),
+       y = paste0("PC2 (", round(var_explained_bin[2]*100, 1), "% Variance)")) +
+  scale_color_manual(values = c("0" = "steelblue", "1" = "firebrick"))
+
+pca_data_multi <- data.frame(PC1 = pca_multi$x[, 1],
+                             PC2 = pca_multi$x[, 2],
+                             Diabetes = target_multi)
+
+ggplot(pca_data_multi, aes(x = PC1, y = PC2, color = Diabetes)) +
+  geom_point(alpha = 0.5) +
+  theme_minimal() +
+  labs(title = "2D PCA Visualization: Multiclass Labels (0 vs 1 vs 2)",
+       x = "Principal Component 1",
+       y = "Principal Component 2") +
+  scale_color_manual(values = c("0" = "steelblue", "1" = "goldenrod", "2" = "firebrick"))
+
+# The 'rotation' matrix shows how much each original feature contributes to the components
+loadings_bin <- pca_binary$rotation[, 1:2]
+
+top_pc1_features <- sort(abs(loadings_bin[, 1]), decreasing = TRUE)
+
+print("Top drivers of variance for Principal Component 1:")
+print(head(top_pc1_features))
+```
+
+Our analysis of the scree plot reveals that the variance in this dataset is highly concentrated. There is a sharp "elbow" immediately following the second principal component, indicating that the vast majority of mathematical differences between respondents can be captured in just two dimensions. Principal Component 1 (PC1) accounts for an impressive 46.4% of the total variance, while Principal Component 2 (PC2) accounts for 23.3%. Together, these two components explain nearly 70% of the variance across the entire dataset. This is a highly significant finding; it tells us that despite having 21 distinct feature variables, the complexity of the dataset is largely governed by just a few dominant underlying factors rather than an equal contribution from all surveyed lifestyle habits.
+
+When we inspect the rotation matrix to understand what is driving this variance, the feature loadings provide a clear narrative. Age is the overwhelmingly dominant driver, with an exceptionally high loading score of 0.972 on the first principal component. This essentially means that PC1 acts almost entirely as a proxy for the respondent's age. The secondary drivers are socioeconomic and broad health indicators, specifically Income (0.180), General Health (0.082), High Blood Pressure (0.059), and Education (0.058). From a public health perspective, this means that baseline demographic and socioeconomic profiles account for far wider statistical spreads in the data than individual, daily lifestyle choices like physical activity or diet. The foundational reality of a patient's age and economic standing dictates the structure of our data more heavily than any other factor.
+
+This reliance on demographic variables heavily influences the visual structure of our data. When projecting the dataset onto a 2D scatter plot of PC1 and PC2, the data does not form a random, continuous cloud. Instead, it displays very distinct, diagonal grid-like bands. This is a direct visual artifact of the CDC's survey methodology. Because our top variance drivers like Age, Income, and Education are recorded as discrete, ordinal categories, the PCA naturally clusters the respondents into these rigid demographic bands.
+
+Most importantly, analyzing these 2D projections reveals a severe lack of linear class separation. In both the binary (No Diabetes vs. Prediabetes/Diabetes) and multiclass visualizations, the target labels overlap completely within the demographic bands. There are no isolated clusters of healthy or diabetic patients. What this means for our project is that diabetes status cannot be easily separated by simply drawing a straight line across age or income brackets. This heavy structural overlap strongly validates our team's methodology moving into Week 3. It proves that simple, linear predictive models will likely struggle, and we must rely on complex, non-linear algorithms—such as Random Forest, XGBoost, and SVM with RBF kernels—to accurately capture the intricate, multidimensional relationships between these lifestyle variables and diabetes outcomes.
