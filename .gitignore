@@ -24,3 +24,5 @@ renv/staging/
 # OS
 .DS_Store
 Thumbs.db
+
+Prompt.md
