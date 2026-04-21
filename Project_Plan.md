@@ -284,7 +284,7 @@ The final presentation must include the following sections:
 
 ---
 
-## 👤 Person 4 — SVM
+## 👤 Mohemmad — SVM
 
 > **CV model — tune via k-fold cross-validation; apply SMOTE inside folds only. Scaling IS required for SVM.**
 
@@ -312,7 +312,7 @@ The final presentation must include the following sections:
 
 ---
 
-## 👤 Person 5 — Naive Bayes + KNN
+## 👤 Katana — Naive Bayes + KNN
 
 > **CV model — tune via k-fold cross-validation; apply SMOTE inside folds only. Scaling IS required for KNN — apply it. Naive Bayes does not require scaling but applying it does no harm.**
 
