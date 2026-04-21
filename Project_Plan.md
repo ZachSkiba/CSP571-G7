@@ -338,6 +338,8 @@ The final presentation must include the following sections:
 - NB vs KNN comparison summary
 - Metric comparison table vs baseline
 
+> **Contingency:** If KNN becomes time-consuming or difficult to fully tune, prioritize Naive Bayes. Naive Bayes should be fully completed and is the main probabilistic baseline for Week 4 comparison. KNN should still be implemented if time allows, but is secondary.
+
 ---
 
 ## 👥 All Members — Bias & Fairness Checks
