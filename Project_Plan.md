@@ -209,7 +209,7 @@ The final presentation must include the following sections:
 
 ---
 
-## 👤 Person 1 — Logistic Regression Review, Analysis & Week 4 Prep
+## 👤 Matthias — Logistic Regression Review, Analysis & Week 4 Prep
 
 > **Modeling is likely complete**, but do a final review pass before moving on. Verify: binary and multiclass both have a final model retrained on the full training set, the test set was evaluated exactly once per task, CV estimates and test results are close (no overfitting), and all plots (ROC curves, odds ratio, confusion matrix heatmap) render cleanly. If anything looks off, fix it now — this is the benchmark every other model will be compared against.
 
@@ -238,7 +238,7 @@ The final presentation must include the following sections:
 
 ---
 
-## 👤 Person 2 — Random Forest
+## 👤 Matthew — Random Forest
 
 > **Non-CV model — use class weights, no cross-validation. Scaling is NOT required for Random Forest — do not apply it.**
 
@@ -260,7 +260,7 @@ The final presentation must include the following sections:
 
 ---
 
-## 👤 Person 3 — XGBoost / LightGBM
+## 👤 Zach — XGBoost / LightGBM
 
 > **Non-CV model — use `scale_pos_weight` (binary) or `class_weight` (multiclass)**
 
