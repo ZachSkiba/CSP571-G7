@@ -1367,3 +1367,27 @@ that a single linear combination cannot fully capture. Tree-based models
 such as gradient boosting or random forests, which naturally model
 feature interactions and nonlinear boundaries, would be the appropriate
 next step.
+
+# Section 7 — Benchmark Table Export
+
+## Overview
+
+We export the logistic regression results into a shared benchmark table 
+so that all team members can append their model results. This table 
+serves as the baseline for cross-model comparison in Week 4.
+
+```{r benchmark-export}
+benchmark <- data.frame(
+  Model = c("Logistic Regression","Logistic Regression","Logistic Regression"),
+  Dataset = c("Binary","Binary","Multiclass"),
+  Imbalance_Method = c("Class Weights","SMOTE","SMOTE"),
+  CV_F1 = c(0.4425,0.4412,0.4595),
+  Test_F1 = c(0.4435,0.4412,0.4263),
+  Test_ROC_AUC = c(0.8237,0.8199,0.7703),
+  Test_Recall = c(0.7692,0.7597,0.2953),
+  Test_Precision = c(0.3116,0.3109,0.0310)
+)
+
+write.csv(benchmark, "results/model_benchmark_table.csv", row.names = FALSE)
+
+cat("Benchmark table exported to results/model_benchmark_table.csv\n")
