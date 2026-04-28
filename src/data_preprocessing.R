@@ -34,7 +34,7 @@ identify_feature_types <- function(data) {
 fit_scaler <- function(train_data, continuous_cols) {
   
   scaler <- preProcess(
-    train_data[, continuous_cols],
+    train_data[, continuous_cols, drop = FALSE],
     method = c("center", "scale")
   )
   
@@ -50,7 +50,7 @@ transform_data <- function(data, scaler, continuous_cols) {
   
   data_scaled[, continuous_cols] <- predict(
     scaler,
-    data[, continuous_cols]
+    data[, continuous_cols, drop = FALSE]
   )
   
   return(data_scaled)
@@ -59,15 +59,16 @@ transform_data <- function(data, scaler, continuous_cols) {
 # -----------------------------
 # Data pipeline 
 # -----------------------------
-  prepare_data <- function(train_data, test_data) {
+prepare_data <- function(train_data, test_data, target_col) {
+  
+  # Remove target column for feature detection
+  train_features <- train_data[, !names(train_data) %in% target_col, drop = FALSE]
   
   # Step 1: Identify feature types
-  feature_types <- identify_feature_types(train_data)
+  feature_types <- identify_feature_types(train_features)
   
-  feature_types$binary
-  feature_types$continuous
-  print("Binary Features    : ",feature_types)
-  print("Continuous Features: ",feature_types)
+  cat("Binary Features    :", paste(feature_types$binary, collapse = ", "), "\n")
+  cat("Continuous Features:", paste(feature_types$continuous, collapse = ", "), "\n")
   
   continuous_cols <- feature_types$continuous
   

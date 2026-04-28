@@ -21,7 +21,10 @@ required_packages <- c(
   "ggplot2",
   "readr",
   "tidyr",
-  "stringr"
+  "stringr",
+  "e1071", 
+  "pROC", 
+  "caret"
 )
 
 # Step 3: Install function

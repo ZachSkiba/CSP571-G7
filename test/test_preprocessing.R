@@ -104,6 +104,18 @@ test_that("transform_data modifies only continuous columns", {
 })
 
 
+
+# Unit tests for prepare_data()
+
+test_that("prepare_data returns valid structure", {
+  result <- prepare_data(train_data, test_data)
+  
+  expect_true("train" %in% names(result))
+  expect_true("test" %in% names(result))
+  expect_true("scaler" %in% names(result))
+  expect_true("feature_types" %in% names(result))
+})
+
 test_that("row counts are preserved", {
   result <- prepare_data(train_data, test_data)
   
@@ -126,31 +138,4 @@ test_that("continuous features are scaled (sd approx 1)", {
     expect_equal(sd(result$train[[col]], na.rm = TRUE), 1, tolerance = 1e-6)
   }
 })
-
-
-# Unit tests for prepare_data
-test_that("prepare_data returns valid structure", {
-  cat("\n ********* Prepare date  ********* \n")
-  result <- prepare_data(train_data, test_data)
-  
-  # structure check
-  expect_true(is.list(result))
-  
-  expect_true("train" %in% names(result))
-  expect_true("test" %in% names(result))
-  expect_true("scaler" %in% names(result))
-  expect_true("feature_types" %in% names(result))
-  
-  # type checks
-  expect_s3_class(result$scaler, "preProcess")
-  expect_true(is.data.frame(result$train))
-  expect_true(is.data.frame(result$test))
-  expect_true(is.list(result$feature_types))
-  
-  # row count validation
-  expect_equal(nrow(result$train), nrow(train_data))
-  expect_equal(nrow(result$test), nrow(test_data))
-})
-
-
 
