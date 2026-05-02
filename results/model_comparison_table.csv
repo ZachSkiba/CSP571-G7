@@ -1,0 +1,7 @@
+"Dataset","Model","Accuracy","F1_Score"
+"Binary","Baseline",0.860653960620455,0
+"Binary","Naive Bayes",0.741273626741826,0.41825836472413
+"Binary","KNN (K=15)",0.787354396200012,0.430629584674653
+"Multiclass","Baseline",0.3333,0.3333
+"Multiclass","Naive Bayes",0.755365906537635,0.430100214824189
+"Multiclass","KNN (K=7)",0.834795119932199,0.596201433991569
